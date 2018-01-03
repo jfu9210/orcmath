@@ -76,7 +76,7 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		buttons = new ButtonInterfaceJenny[numberOfButtons];
 		Color[] colorList = {Color.MISTYROSE, Color.LAVENDER, Color.HONEYDEW, Color.SALMON, Color.PEACHPUFF};
 		for(int i = 0; i < numberOfButtons; i++) {
-			ButtonInterfaceJenny b = getAButton();
+			final ButtonInterfaceJenny b = getAButton();
 			b.setColor(colorList[i]); 
    			b.setX(70);
     			b.setY(50);
@@ -85,7 +85,13 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 					if(acceptInput){
 						Thread blink = new Thread(new Runnable(){
 							public void run(){
-							
+								b.highlight();
+								try {
+									Thread.sleep(800);
+								}catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+								b.dim();
 							}
 						});
 					}
