@@ -74,13 +74,15 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 	public void addButtons() {
 		int numberOfButtons = 5;
 		buttons = new ButtonInterfaceJenny[numberOfButtons];
-		Color[] = {Color.MISTYROSE, Color.LAVENDER, Color.HONEYDEW, Color.SALMON, Color.PEACHPUFF};
+		Color[] colorList = {Color.MISTYROSE, Color.LAVENDER, Color.HONEYDEW, Color.SALMON, Color.PEACHPUFF};
 		for(int i = 0; i < numberOfButtons; i++) {
 			ButtonInterfaceJenny b = getAButton();
+			b.setColor(colorList[i]); 
+   			b.setX(70);
+    			b.setY(50);
 			buttons[i] = b;
 		}
 	}
-
 
 	/**
 		Placeholder until partner finishes implementation of ButtonInterface
