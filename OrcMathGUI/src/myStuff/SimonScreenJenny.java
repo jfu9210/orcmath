@@ -83,7 +83,12 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 			b.setAction(new Action(){
 				public void act(){
 					if(acceptInput){
-						
+						Thread blink = new Thread(new Runnable(){
+							public void run(){
+							
+							}
+						});
+					}
 				}
 			});
 			buttons[i] = b;
