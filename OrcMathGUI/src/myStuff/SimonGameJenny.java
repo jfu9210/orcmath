@@ -1,4 +1,4 @@
-package jenny;
+package myStuff;
 
 public class SimonGameJenny {
 
