@@ -1,12 +1,12 @@
 package myStuff;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import guiTeacher.components.*;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.ClickableScreen;
-import javafx.scene.paint.Color;
 
 public class SimonScreenJenny extends ClickableScreen implements Runnable {
 
@@ -26,8 +26,69 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		app.start();
 	}
 
-	public void run() {
+	public void run(){
+		label.setText("");
+		nextRound();
+	}
 
+	public void nextRound() {
+		acceptingInput = false;
+		roundNumber++;
+
+		MoveInterfaceJenny moveInterface = randomMove();
+		sequence.add(moveInterface);
+
+		progress.setRound(roundNumber);
+		progress.setSequenceSize(sequence.size());
+		changeText("Simon's turn");
+		label.setText("");
+		playSequence();
+
+		changeText("Your turn");
+		acceptingInput = true;
+		sequenceIndex = 0;
+	}
+
+	public void playSequence() {
+		ButtonInterfaceJenny b = null;
+		for(int i = 0; i < sequence.size(); i++) {
+			if(b != null) {
+				b.dim();
+				b = sequence.get(i).getButton();
+				b.highlight();
+				int sleepTime = getTime();
+				Thread sleep = new Thread(new Runnable(){
+					public void run(){
+						try {
+							Thread.sleep(sleepTime);
+						}catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				sleep.start();
+			}
+		}
+		b.dim();
+	}
+
+	public int getTime() {
+		if(1500 + (roundNumber * -100) <= 0)
+			return 100;
+		return 1500 + (roundNumber * -100);
+	}
+
+	public void changeText(String s) {
+		Thread text = new Thread(new Runnable(){
+			public void run(){
+				try {
+					Thread.sleep(1000);
+				}catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		text.start();
 	}
 
 	public void initAllObjects(List<Visible> viewObjects) {
@@ -74,15 +135,15 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 	public void addButtons() {
 		int numberOfButtons = 5;
 		buttons = new ButtonInterfaceJenny[numberOfButtons];
-		Color[] colorList = {Color.MISTYROSE, Color.LAVENDER, Color.HONEYDEW, Color.SALMON, Color.PEACHPUFF};
+		Color[] colorList = {Color.PINK, Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN};
 		for(int i = 0; i < numberOfButtons; i++) {
 			final ButtonInterfaceJenny b = getAButton();
 			b.setColor(colorList[i]); 
-   			b.setX(70);
-    			b.setY(50);
+			b.setX(70);
+			b.setY(50);
 			b.setAction(new Action(){
 				public void act(){
-					if(acceptInput){
+					if(acceptingInput){
 						Thread blink = new Thread(new Runnable(){
 							public void run(){
 								b.highlight();
@@ -94,7 +155,21 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 								b.dim();
 							}
 						});
+						blink.start();
+						if(b == sequence.get(sequenceIndex).getButton())
+							sequenceIndex++;
+						else 
+							gameOver();
+						if(sequenceIndex == sequence.size()){ 
+							Thread nextRound = new Thread(SimonScreenJenny.this); 
+							nextRound.start(); 
+						}
 					}
+				}
+
+				private void gameOver() {
+					// TODO Auto-generated method stub
+					
 				}
 			});
 			buttons[i] = b;
