@@ -129,7 +129,7 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 	Placeholder until partner finishes implementation of ProgressInterface
 	 */
 	public ProgressInterfaceJenny getProgress() {
-		return null;
+		return progress.getProgress();
 	}
 
 	public void addButtons() {
@@ -139,8 +139,8 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		for(int i = 0; i < numberOfButtons; i++) {
 			final ButtonInterfaceJenny b = getAButton();
 			b.setColor(colorList[i]); 
-			b.setX(70);
-			b.setY(50);
+			b.setX(70+5*i);
+			b.setY(50+5*i);
 			b.setAction(new Action(){
 				public void act(){
 					if(acceptingInput){
@@ -175,6 +175,6 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		Placeholder until partner finishes implementation of ButtonInterface
 	 */
 	public ButtonInterfaceJenny getAButton() {
-		return null;
+		return new ButtonJane(getX(), getY(), getWidth(), getHeight(), "", null);
 	}
 }
