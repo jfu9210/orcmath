@@ -159,17 +159,12 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 						if(b == sequence.get(sequenceIndex).getButton())
 							sequenceIndex++;
 						else 
-							gameOver();
+							progress.gameOver();
 						if(sequenceIndex == sequence.size()){ 
 							Thread nextRound = new Thread(SimonScreenJenny.this); 
 							nextRound.start(); 
 						}
 					}
-				}
-
-				private void gameOver() {
-					// TODO Auto-generated method stub
-					
 				}
 			});
 			buttons[i] = b;
