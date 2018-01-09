@@ -17,14 +17,14 @@ public class ButtonJane extends Button implements ButtonInterfaceJenny{
 
 	@Override
 	public void setColor(Color color) {
-		this.setColor(color);
+		this.setForeground(color);
 		orginal = color;
 		update();
 	}
 
 	@Override
 	public void dim() {
-		this.setColor(orginal.darker());
+		this.setForeground(orginal.darker());
 		update();
 	}
 
@@ -45,8 +45,7 @@ public class ButtonJane extends Button implements ButtonInterfaceJenny{
 		else{
 			g.setColor(Color.lightGray);
 			g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, curveX, curveY);
-		}
-		update();	
+		}	
 
 }
 }

@@ -121,15 +121,15 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 	/**
 	Placeholder until partner finishes implementation of MoveInterface
 	 */
-	public MoveInterfaceJenny getMove(int index) {
-		return null;
+	public MoveInterfaceJenny getMove(int index) { 
+		return new MoveJane();
 	}
 
 	/**
 	Placeholder until partner finishes implementation of ProgressInterface
 	 */
 	public ProgressInterfaceJenny getProgress() {
-		return progress.getProgress();
+		return new ProgressJane(0, 0, 1, 1);
 	}
 
 	public void addButtons() {
