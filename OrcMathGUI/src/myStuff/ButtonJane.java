@@ -10,9 +10,15 @@ import guiTeacher.components.Button;
 
 public class ButtonJane extends Button implements ButtonInterfaceJenny{
 	private Color orginal;
+	private boolean on;
+	
 	public ButtonJane(int x, int y, int w, int h, String text, Action action) {
 		super(x, y, w, h, "", null);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setOn(boolean o) {
+		on = o;
 	}
 
 	@Override

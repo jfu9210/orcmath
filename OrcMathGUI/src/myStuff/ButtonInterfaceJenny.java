@@ -11,4 +11,5 @@ public interface ButtonInterfaceJenny extends Clickable {
 	void setAction(Action a);
 	void dim();
 	void highlight();
+	void setOn(boolean b);
 }

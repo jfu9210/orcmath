@@ -12,7 +12,7 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 
 	private TextLabel label;
 	private ButtonInterfaceJenny[] buttons;
-	private ProgressInterfaceJenny progress;
+	//private ProgressInterfaceJenny progress;
 	private ArrayList<MoveInterfaceJenny> sequence;
 
 	private int roundNumber;
@@ -38,8 +38,8 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		MoveInterfaceJenny moveInterface = randomMove();
 		sequence.add(moveInterface);
 
-		progress.setRound(roundNumber);
-		progress.setSequenceSize(sequence.size());
+		//progress.setRound(roundNumber);
+		//progress.setSequenceSize(sequence.size());
 		changeText("Simon's turn");
 		label.setText("");
 		playSequence();
@@ -97,7 +97,7 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 			viewObjects.add(b); 
 		}
 
-		progress = getProgress();
+		//progress = getProgress();
 		label = new TextLabel(130,230,300,40,"Let's play Simon!");
 		sequence = new ArrayList<MoveInterfaceJenny>();
 
@@ -106,7 +106,7 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		sequence.add(randomMove());
 		sequence.add(randomMove());
 		roundNumber = 0;
-		viewObjects.add(progress);
+		//viewObjects.add(progress);
 		viewObjects.add(label);
 	}
 
@@ -139,8 +139,8 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		for(int i = 0; i < numberOfButtons; i++) {
 			final ButtonInterfaceJenny b = getAButton();
 			b.setColor(colorList[i]); 
-			b.setX(70+5*i);
-			b.setY(50+5*i);
+			b.setX(70+20*i);
+			b.setY(50+30*i);
 			b.setAction(new Action(){
 				public void act(){
 					if(acceptingInput){
@@ -159,7 +159,7 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 						if(b == sequence.get(sequenceIndex).getButton())
 							sequenceIndex++;
 						else 
-							progress.gameOver();
+							gameOver();
 						if(sequenceIndex == sequence.size()){ 
 							Thread nextRound = new Thread(SimonScreenJenny.this); 
 							nextRound.start(); 
@@ -171,10 +171,14 @@ public class SimonScreenJenny extends ClickableScreen implements Runnable {
 		}
 	}
 
+	public void gameOver() {
+		changeText("GAME OVER");
+	}
+
 	/**
 		Placeholder until partner finishes implementation of ButtonInterface
 	 */
 	public ButtonInterfaceJenny getAButton() {
-		return new ButtonJane(getX(), getY(), getWidth(), getHeight(), "", null);
+		return new ButtonJane(getX(), getY(), getWidth()/7, getHeight()/7, "", null);
 	}
 }

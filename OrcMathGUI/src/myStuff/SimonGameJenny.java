@@ -10,12 +10,12 @@ public class SimonGameJenny extends GUIApplication {
 	}
 
 	public void initScreen() {
-		SimonScreenJenny screen = new SimonScreenJenny(getWidth(), getHeight());
+		SimonGame screen = new SimonGame(getWidth(), getHeight());
 		setScreen(screen);
 	}
 
 	public static void main(String[] args) {
-		SimonGameJenny gui = new SimonGameJenny(800, 550);
+		SimonGameJenny gui = new SimonGameJenny(1000, 600);
 		Thread go = new Thread(gui);
 		go.start();
 	}
