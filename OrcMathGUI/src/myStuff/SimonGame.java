@@ -11,15 +11,14 @@ import guiTeacher.userInterfaces.ClickableScreen;
 public class SimonGame extends ClickableScreen implements Runnable {
 
 	private TextLabel label;
-	private TextLabel text;
+	private TextArea text;
 	private Button[] buttons;
 	private String[] blabel;
 	private ArrayList<String> sequence;
 	
-
-	private int roundNumber;
 	private boolean acceptingInput;
 	private int sequenceIndex;
+	public String last;
 
 	public SimonGame(int width, int height) {
 		super(width, height);
@@ -35,52 +34,28 @@ public class SimonGame extends ClickableScreen implements Runnable {
 	}
 
 	public void nextRound() {
-		acceptingInput = false;
-		roundNumber++;
-		
-		changeLabel("Simon's turn");
 		label.setText("");
 		text.setText("");
 		playSequence();
 
-		changeLabel("Your turn");
 		acceptingInput = true;
 		sequenceIndex = 0;
 	}
 
 	public void playSequence() {
-		sequence.add(blabel[(int)(Math.random() * blabel.length)]);
-		for(int i = 0; i < sequence.size(); i++) {
-			addText(sequence.get(i));
-		}
+		String color = random();
+		sequence.add(color);
+		last = color;
+		text.setText(sequence.get(sequence.size() - 1));
 	}
 	
-	public void addText(String s) {
-		Thread t = new Thread(new Runnable(){
-			public void run(){
-				try {
-					text.setText(text + ", " + s);
-					Thread.sleep(6000);
-				}catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		t.start();
-	}
-
-	public void changeLabel(String s) {
-		Thread text = new Thread(new Runnable(){
-			public void run(){
-				try {
-					label.setText(s);
-					Thread.sleep(5000);
-				}catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		text.start();
+	public String random() {
+		int index = (int) (Math.random() * blabel.length);
+		String test = blabel[index];
+		while(last.equals(test)) {
+			index = (int) (Math.random() * blabel.length);
+		}
+		return test;
 	}
 
 	public void initAllObjects(List<Visible> viewObjects) {
@@ -90,13 +65,13 @@ public class SimonGame extends ClickableScreen implements Runnable {
 		}
 		
 		label = new TextLabel(500, 230,300,40,"Let's play Simon!");
-		text = new TextLabel(500, 300, 300, 40, "");
 		viewObjects.add(label);
+		
+		text = new TextArea(500, 300, 300, 1000, "");
 		viewObjects.add(text);
 
-		//add 2 moves to start
-		roundNumber = 0;
 		sequence = new ArrayList<String>();
+		last = "";
 	}
 	
 	public void addButtons() {
@@ -106,9 +81,9 @@ public class SimonGame extends ClickableScreen implements Runnable {
 		String[] l = {"pink","red","orange","yellow","green"};
 		blabel = l;
 		for(int i = 0; i < numberOfButtons; i++) {
-			final Button b = new Button(getX(), getY(), 100, 30, blabel[i], null);
+			final Button b = new Button(getX(), getY(), 100, 100, blabel[i], null);
 			b.setBackground(colorList[i]); 
-			b.setX(70);
+			b.setX(100);
 			b.setY(50+40*i);
 			b.setAction(new Action(){
 				public void act(){
@@ -129,7 +104,7 @@ public class SimonGame extends ClickableScreen implements Runnable {
 	}
 
 	public void gameOver() {
-		changeLabel("GAME OVER");
+		label.setText("GAME OVER!");
 		acceptingInput = false;
 	}
 }
