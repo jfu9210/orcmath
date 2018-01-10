@@ -81,7 +81,7 @@ public class SimonGame extends ClickableScreen implements Runnable {
 		String[] l = {"pink","red","orange","yellow","green"};
 		blabel = l;
 		for(int i = 0; i < numberOfButtons; i++) {
-			final Button b = new Button(getX(), getY(), 100, 100, blabel[i], null);
+			final Button b = new Button(getX(), getY(), 100, 70, blabel[i], null);
 			b.setBackground(colorList[i]); 
 			b.setX(100);
 			b.setY(50+40*i);
