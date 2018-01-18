@@ -27,30 +27,31 @@ public class RaceScreen extends FullFunctionScreen {
 		s = -1;
 		count = 6;
 		start = 4;
-	timer = new Timer();
-			TimerTask task = new TimerTask() {
-				
-				@Override
-				public void run() {
-					start--;
-					button.setEnabled(false);
-					if(start == 0) {
-						text.setText("GO!");
-						button.setText("Click me!");
-					}else
-						text.setText("Score: " + start);
-					if(start < 0) {
-						button.setEnabled(true);
-						count--;
-						text.setText(count + " seconds left!!!");
-						if(count == 0) {
-							button.setText("Done");
-							button.setEnabled(false);
-							timer.cancel();
-						}
+
+		timer = new Timer();
+		TimerTask task = new TimerTask() {
+
+			@Override
+			public void run() {
+				start--;
+				button.setEnabled(false);
+				if(start == 0) {
+					text.setText("GO!");
+					button.setText("Click me!");
+				}else
+					text.setText("Score: " + start);
+				if(start < 0) {
+					button.setEnabled(true);
+					count--;
+					text.setText(count + " seconds left!!!");
+					if(count == 0) {
+						button.setText("Done");
+						button.setEnabled(false);
+						timer.cancel();
 					}
 				}
-			};
+			}
+		};
 		score = new TextArea(200, 100, 100, 100, "Score: 0");
 		viewObjects.add(score);
 
@@ -67,8 +68,8 @@ public class RaceScreen extends FullFunctionScreen {
 			}
 		});
 		viewObjects.add(button);
-		
-		
+
+
 	}
 
 	public void start(TimerTask task) {
