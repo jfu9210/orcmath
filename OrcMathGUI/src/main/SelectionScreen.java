@@ -18,7 +18,7 @@ public class SelectionScreen extends FullFunctionScreen {
 	}
 
 	public void initAllObjects(List<Visible> viewObjects) {
-		background = new Graphic(0, 0, "resources/selection.jpg");
+		background = new Graphic(0, 0, "resources/");
 		viewObjects.add(background);
 	}
 }
