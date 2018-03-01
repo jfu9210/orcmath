@@ -18,6 +18,8 @@
  *******************************************************************************/
 package guiTeacher.userInterfaces;
 
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -26,12 +28,15 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import guiTeacher.interfaces.Clickable;
 import guiTeacher.interfaces.Dragable;
 import guiTeacher.interfaces.FocusController;
 import guiTeacher.interfaces.KeyedComponent;
 import guiTeacher.interfaces.Scrollable;
 import guiTeacher.interfaces.Visible;
+import main.ResizableScreen;
 
 public abstract class FullFunctionScreen extends ClickableScreen implements KeyListener, FocusController, MouseWheelListener {
 

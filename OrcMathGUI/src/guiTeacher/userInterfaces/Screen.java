@@ -21,6 +21,8 @@ package guiTeacher.userInterfaces;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -28,12 +30,18 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import guiTeacher.components.TextLabel;
 import guiTeacher.interfaces.Visible;
+import main.ResizableScreen;
 
-public abstract class Screen extends ComponentContainer{
+public abstract class Screen extends ComponentContainer {
 
 	
 	
+
 	public Screen(int width, int height) {
 		super(width, height);
 	}
@@ -70,7 +78,4 @@ public abstract class Screen extends ComponentContainer{
 	public MouseWheelListener getMouseWheelListener(){
 		return null;
 	}
-
-
-
 }

@@ -22,13 +22,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import guiTeacher.interfaces.Visible;
+import main.ResizableScreen;
 
 public abstract class ComponentContainer extends JPanel{
 
@@ -56,7 +60,6 @@ public abstract class ComponentContainer extends JPanel{
 		initObjects(viewObjects);
 	}
 
-
 	public ComponentContainer(int width, int height, ArrayList<Visible> initWithObjects) {
 		viewObjects=initWithObjects;
 		initImage(width, height);
@@ -64,7 +67,7 @@ public abstract class ComponentContainer extends JPanel{
 		heightScreen = image.getHeight();
 		initObjects(viewObjects);
 	}
-
+	
 	public void initImage(int width, int height) {
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		formerImage = null;
