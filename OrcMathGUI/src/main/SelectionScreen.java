@@ -24,4 +24,8 @@ public class SelectionScreen extends FullFunctionScreen {
 		background = new Graphic(0, 0, "resources/spaceAnimal.jpg");
 		viewObjects.add(background);
 	}
+	
+	public void addButtons(List<Visible> viewObjects) {
+		
+	}
 }
