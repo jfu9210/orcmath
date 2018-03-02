@@ -12,20 +12,26 @@ import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
 public class SelectionScreen extends FullFunctionScreen {
-	
-	private Graphic background;
+
+	private Graphic back;
 	private ArrayList<CustomImageButton> buttons;
 
 	public SelectionScreen(int width, int height) {
 		super(width, height);
 	}
-	
+
 	public void initAllObjects(List<Visible> viewObjects) {
-		background = new Graphic(0, 0, "resources/spaceAnimal.jpg");
-		viewObjects.add(background);
+		back = new Graphic(0, 0, "resources/spaceAnimal.jpg");
+		viewObjects.add(back);
+	}
+
+	public void addButtons(List<Visible> viewObjects) {
+
 	}
 	
-	public void addButtons(List<Visible> viewObjects) {
-		
+	public void resize(int w, int h){
+		back.loadImages("resources/spaceAnimal.png", w, h);
+		back.update();
+		super.resize(w, h);
 	}
 }

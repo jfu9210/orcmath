@@ -21,8 +21,6 @@ package guiTeacher.userInterfaces;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -30,18 +28,12 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-import guiTeacher.components.TextLabel;
 import guiTeacher.interfaces.Visible;
-import main.ResizableScreen;
 
-public abstract class Screen extends ComponentContainer {
+public abstract class Screen extends ComponentContainer{
 
 	
 	
-
 	public Screen(int width, int height) {
 		super(width, height);
 	}
@@ -50,17 +42,24 @@ public abstract class Screen extends ComponentContainer {
 		super(width,height,initWithObjects);
 		
 	}
+	
 
+	
 	public void update(Graphics2D g){
 		BufferedImage buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = buffer.createGraphics();
 		g2.setRenderingHint( RenderingHints.KEY_ANTIALIASING,
 	             RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setColor(Color.white);
-		g2.fillRect(0, 0, getImage().getWidth(), getImage().getHeight());
+		drawBackground(g2);
 		g2.setColor(Color.black);
 		drawObjects(g2);
 		g.drawImage(buffer, 0, 0, null);
+	}
+
+
+	protected void drawBackground(Graphics2D g2) {
+		g2.setColor(getScreenBackground());
+		g2.fillRect(0, 0, getImage().getWidth(), getImage().getHeight());
 	}
 
 	public MouseListener getMouseListener() {
@@ -78,4 +77,8 @@ public abstract class Screen extends ComponentContainer {
 	public MouseWheelListener getMouseWheelListener(){
 		return null;
 	}
+
+
+
+
 }
